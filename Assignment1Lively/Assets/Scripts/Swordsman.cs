@@ -84,7 +84,7 @@ public class Swordsman : Enemy, IHasWeapon, IMeleeAttacker
     /// Delay the next attack
     /// </summary>
     /// <returns></returns>
-    IEnumerator WaitForNextHit()
+    private IEnumerator WaitForNextHit()
     {
         while (getOpponent() != null)
         {

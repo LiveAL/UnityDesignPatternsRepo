@@ -54,7 +54,7 @@ public class Archer : Enemy , IHasWeapon, IRangedAttacker
     /// </summary>
     /// <param name="delay">Time between attacks</param>
     /// <returns></returns>
-    IEnumerator WaitForHit(float delay)
+    private IEnumerator WaitForHit(float delay)
     {
         while (getAmmoAmount() > 0)
         {
