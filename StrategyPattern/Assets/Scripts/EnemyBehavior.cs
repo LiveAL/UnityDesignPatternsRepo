@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * EnemyBehavior.cs
+ * Assignment 2
+ * Contains the behavior for the enemies in game for movement and status.
+ */
 using UnityEngine;
 using UnityEngine.UI;
 

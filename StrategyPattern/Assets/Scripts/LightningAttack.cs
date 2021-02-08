@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/* 
+ * Ashton Lively
+ * LightningAttack.cs
+ * Assignment 2
+ * Contains behavior for the lightning attack type for its damage and appearance.
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;

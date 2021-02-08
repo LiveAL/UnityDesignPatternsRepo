@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * ITakeDamage.cs
+ * Assignment 2
+ * Interface for attacks that give damage.
+ */
 using UnityEngine;
 
 interface ITakeDamage

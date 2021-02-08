@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * IceAttack.cs
+ * Assignment 2
+ * Contains behavior for the ice attack type for its damage and appearance.
+ */
 using UnityEngine;
 using UnityEditor;
 

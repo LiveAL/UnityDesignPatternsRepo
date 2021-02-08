@@ -1,5 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * FireAttack.cs
+ * Assignment 2
+ * Contains behavior for the fire attack type for its damage and appearance.
+ */
+using System.Collections;
 using UnityEngine;
 using UnityEditor;
 
