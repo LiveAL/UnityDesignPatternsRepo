@@ -7,8 +7,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-
 public class LightningAttack : ElementalAttack, ITakeDamage
 {
     private ParticleSystem lightningParticles;
@@ -77,6 +75,6 @@ public class LightningAttack : ElementalAttack, ITakeDamage
 
     public override void AssignParticles()
     {
-        lightningParticles = (ParticleSystem)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Lightning.prefab", typeof(ParticleSystem));
+        lightningParticles = (ParticleSystem)Resources.Load("Prefabs/Lightning", typeof(ParticleSystem));
     }
 }

@@ -5,7 +5,6 @@
  * Contains behavior for the ice attack type for its damage and appearance.
  */
 using UnityEngine;
-using UnityEditor;
 
 public class IceAttack : ElementalAttack, ITakeDamage
 {
@@ -42,6 +41,6 @@ public class IceAttack : ElementalAttack, ITakeDamage
 
     public override void AssignParticles()
     {
-        iceParticles = (ParticleSystem)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Ice.prefab", typeof(ParticleSystem));
+        iceParticles = (ParticleSystem)Resources.Load("Prefabs/Ice", typeof(ParticleSystem));
     }
 }

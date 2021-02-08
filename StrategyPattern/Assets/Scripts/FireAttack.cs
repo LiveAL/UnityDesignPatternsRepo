@@ -6,7 +6,6 @@
  */
 using System.Collections;
 using UnityEngine;
-using UnityEditor;
 
 public class FireAttack : ElementalAttack, ITakeDamage
 {
@@ -56,6 +55,6 @@ public class FireAttack : ElementalAttack, ITakeDamage
 
     public override void AssignParticles()
     {
-        fireParticles = (ParticleSystem)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Fire.prefab", typeof(ParticleSystem));
+        fireParticles = (ParticleSystem)Resources.Load("Prefabs/Fire", typeof(ParticleSystem));
     }
 }
