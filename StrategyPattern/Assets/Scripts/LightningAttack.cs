@@ -12,7 +12,7 @@ public class LightningAttack : ElementalAttack, ITakeDamage
     public override void Attack(Transform spawnPos)
     {
         // Spawn particle system for lightning
-        ParticleSystem particles = Instantiate(lightningParticles, spawnPos);
+        ParticleSystem particles = Instantiate(lightningParticles, spawnPos.transform.position, Quaternion.identity);
         // Destroy particles after 2 seconds
         Destroy(particles, 2f);
 
@@ -27,7 +27,7 @@ public class LightningAttack : ElementalAttack, ITakeDamage
                 objectsElectrocuted.Add(enemy.gameObject);
                 StartCoroutine(RemoveObjectNotElectrocuted(enemy.gameObject));
 
-                ParticleSystem newParticles = Instantiate(lightningParticles, enemy.transform);
+                ParticleSystem newParticles = Instantiate(lightningParticles, enemy.transform.position, Quaternion.identity);
                 Destroy(newParticles, 2f);
 
                 TakeDamage(enemy.gameObject);
@@ -40,7 +40,7 @@ public class LightningAttack : ElementalAttack, ITakeDamage
         // Add 5 damage to the enemy 
         if (enemyToDamage != null)
         {
-            enemyToDamage.GetComponent<EnemyBehavior>().UpdateHitPoints(5f);
+            enemyToDamage.GetComponent<EnemyBehavior>().UpdateHitPoints(5);
         }
 
         // Damage enemies within range as well

@@ -10,9 +10,9 @@ public class FireAttack : ElementalAttack, ITakeDamage
     public override void Attack(Transform spawnPos)
     {
         // Spawn particle system for fire
-        ParticleSystem particles = Instantiate(fireParticles, spawnPos);
+        ParticleSystem particles = Instantiate(fireParticles, spawnPos.transform.position, Quaternion.identity);
         // Destroy particles after 5 seconds
-        Destroy(particles, 5f);
+        Destroy(particles, 2f);
 
         // Set in range on fire. 
         Collider[] enemiesInRange = Physics.OverlapSphere(particles.transform.position, 4f);
@@ -21,8 +21,8 @@ public class FireAttack : ElementalAttack, ITakeDamage
         foreach (Collider enemy in enemiesInRange)
         {
             //particlesOnEnemies.Add(Instantiate(fireParticles, enemy.transform));
-            ParticleSystem newParticles = Instantiate(fireParticles, enemy.transform);
-            Destroy(newParticles, 5f);
+            ParticleSystem newParticles = Instantiate(fireParticles, enemy.transform.position, Quaternion.identity);
+            Destroy(newParticles, 2f);
 
             TakeDamage(enemy.gameObject);
         }
@@ -44,7 +44,7 @@ public class FireAttack : ElementalAttack, ITakeDamage
             // Add 1 damage to the enemy every half second
             if (enemy != null)
             {
-                enemy.GetComponent<EnemyBehavior>().UpdateHitPoints(1f);
+                enemy.GetComponent<EnemyBehavior>().UpdateHitPoints(1);
             }
         }
     }

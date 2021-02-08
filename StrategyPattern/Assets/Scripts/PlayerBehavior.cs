@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    [Tooltip("Text displaying current attack type.")]
+    public Text typeText;
+
     private ElementalAttack elementalAttack;
     private int currAttackIndex;
 
@@ -35,18 +40,21 @@ public class PlayerBehavior : MonoBehaviour
                     Destroy(GetComponent<ElementalAttack>());
                     elementalAttack = gameObject.AddComponent<FireAttack>();
                     elementalAttack.AssignParticles();
+                    typeText.text = "Type: Fire. Press tab to change.";
                     break;
                 case (1):
                     Debug.Log("Switching to ice attack.");
                     Destroy(GetComponent<ElementalAttack>());
                     elementalAttack = gameObject.AddComponent<IceAttack>();
                     elementalAttack.AssignParticles();
+                    typeText.text = "Type: Ice. Press tab to change.";
                     break;
                 default:
                     Debug.Log("Switching to lightning attack.");
                     Destroy(GetComponent<ElementalAttack>());
                     elementalAttack = gameObject.AddComponent<LightningAttack>();
                     elementalAttack.AssignParticles();
+                    typeText.text = "Type: Lightning. Press tab to change.";
                     break;
             }
         }
@@ -55,6 +63,11 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             elementalAttack.Attack(transform);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

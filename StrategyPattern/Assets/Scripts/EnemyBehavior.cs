@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -9,15 +10,35 @@ public class EnemyBehavior : MonoBehaviour
 
     private bool moving = true;
 
+    [Tooltip("Hit points text")]
+    public Text hitPointsText;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        hitPointsText.text = "Hit Points: " + hitPoints;
     }
+
+    private Vector3 moveDirection = Vector3.left;
+    private float timeElapsedOnMovement = 0;
 
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (moving)
+        {
+            // Move in direction
+            timeElapsedOnMovement += Time.deltaTime;
+            transform.position += moveDirection * 0.8f * Time.deltaTime;
+
+            // Switch move direction
+            if (timeElapsedOnMovement >= 5f)
+            {
+                timeElapsedOnMovement = 0;
+                moveDirection = new Vector3(moveDirection.x * -1, moveDirection.y, moveDirection.z);
+            }
+        }*/
         
     }
 
@@ -35,8 +56,11 @@ public class EnemyBehavior : MonoBehaviour
     /// <param name="hp"></param>
     public void UpdateHitPoints(float hp)
     {
-        Debug.Log(gameObject.name + " took damage.");
         hitPoints -= hp;
+
+        Debug.Log(gameObject.name + " took damage.");
+        hitPointsText.text = "Hit Points: " + hitPoints;
+        
 
         if (hitPoints <= 0)
         {
