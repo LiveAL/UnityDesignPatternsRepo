@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Shadow
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Shadows
+  - Player
   - 
   - 
   - 
@@ -40,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 468812193
+    locked: 0
+  - name: Guard Cone
+    uniqueID: 1697376749
+    locked: 0
+  - name: Guard
+    uniqueID: 1744704289
+    locked: 0
+  - name: Shadows
+    uniqueID: 1333954153
+    locked: 0
+  - name: UI
+    uniqueID: 1106862847
     locked: 0
