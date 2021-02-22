@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * WeaponUpgradeDecorator.cs
+ * Assignment 4
+ * Abstract class for weapon mods. 
+ */
 
 public abstract class WeaponUpgradeDecorator : Weapon
 {

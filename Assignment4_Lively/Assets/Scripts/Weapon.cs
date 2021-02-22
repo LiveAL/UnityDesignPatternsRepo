@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * Weapon.cs
+ * Assignment 4
+ * Abstract class for the created weapons.
+ */
 
 public abstract class Weapon
 {

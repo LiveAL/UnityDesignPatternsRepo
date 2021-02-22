@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * Grease.cs
+ * Assignment 4
+ * Adds properties for when the player oils the gun.
+ */
 using UnityEngine;
 
 public class Grease : WeaponUpgradeDecorator

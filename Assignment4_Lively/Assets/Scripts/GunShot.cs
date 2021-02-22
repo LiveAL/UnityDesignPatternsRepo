@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * GunShot.cs
+ * Assignment 4
+ * Adds properties for when the player shoots the gun.
+ */
 using UnityEngine;
 
 public class GunShot : WeaponUpgradeDecorator

@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * ExtendedMag.cs
+ * Assignment 4
+ * Adds properties for the extended mag mod.
+ */
 
 public class ExtendedMag : WeaponUpgradeDecorator
 {

@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * WeaponGun.cs
+ * Assignment 4
+ * Adds properties for if the player has the handgun equipped.
+ */
 
 public class WeaponHandgun : Weapon
 {

@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * Ammunition.cs
+ * Assignment 4
+ * Adds properties for when the player adds a piece of ammo. 
+ */
 using UnityEngine;
 
 public class Ammunition : WeaponUpgradeDecorator

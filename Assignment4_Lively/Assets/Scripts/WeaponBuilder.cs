@@ -1,13 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * WeaponBuilder.cs
+ * Assignment 4
+ * Creates and adds properties of a player created gun. 
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponBuilder : MonoBehaviour
 {
+    [Tooltip("Description text of the gun.")]
     public Text description;
+    [Tooltip("Accuracy percentage text.")]
     public Text accuracy;
+    [Tooltip("Durability percentage text.")]
     public Text durability;
+    [Tooltip("Amount of ammo text.")]
     public Text ammunitionAmt;
 
     private Weapon weapon;
@@ -15,7 +23,7 @@ public class WeaponBuilder : MonoBehaviour
     /// <summary>
     /// Equip or unequip the gun
     /// </summary>
-    /// <param name="weaponType"></param>
+    /// <param name="weaponType">Type of weapon being equipped</param>
     public void Equip(string weaponType)
     {
         switch (weaponType)

@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * WeaponRifle.cs
+ * Assignment 4
+ * Adds properties for if the player has the rifle equipped. 
+ */
 
 public class WeaponRifle : Weapon
 {

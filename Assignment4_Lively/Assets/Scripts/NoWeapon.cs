@@ -1,6 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/* 
+ * Ashton Lively
+ * NoWeapon.cs
+ * Assignment 4
+ * Adds properties for if the player has nothing equipped. 
+ */
 
 public class NoWeapon : Weapon
 {

@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/* 
+ * Ashton Lively
+ * BetterGrip.cs
+ * Assignment 4
+ * Adds properties for the better grip mod.
+ */
 using UnityEngine;
 
 public class BetterGrip : WeaponUpgradeDecorator
