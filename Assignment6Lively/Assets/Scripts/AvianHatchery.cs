@@ -11,10 +11,10 @@ public class AvianHatchery : Hatchery
     /// <summary>
     /// Animal hatched
     /// </summary>
-    Avian avian;
+    private Avian avian;
     private string _animal;
 
-    string attributes = "";
+    private string attributes = "";
 
     public override string animal
     {
