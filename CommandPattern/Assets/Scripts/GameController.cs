@@ -2,7 +2,7 @@
  * Ashton Lively
  * GameController.cs
  * Assignment 7
- * Run the game.
+ * Runs the game. 
  */
 
 using System.Collections;
@@ -207,16 +207,6 @@ public class GameController : MonoBehaviour
             {
                 scrubber.value -= 0.05f;
 
-                switch (clip)
-                {
-                    case (1):
-                        break;
-                    case (2):
-                        break;
-                    case (3):
-                        
-                        break;
-                }
             }
 
             yield return null;
