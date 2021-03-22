@@ -11,7 +11,7 @@ public class CamcorderCapture : MonoBehaviour
 {
     private CameraProperties properties;
 
-    private int currentSlot = 0;
+    public int currentSlot = 0;
 
     private float lastCamPos;
     private float lastCamDist;

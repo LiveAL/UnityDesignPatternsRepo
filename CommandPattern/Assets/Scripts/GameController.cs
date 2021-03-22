@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class GameController : MonoBehaviour
     public GameObject pause;
     public GameObject record;
     public GameObject selectSave;
+    public GameObject selectSlot;
+    public GameObject clickToRecord;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +43,12 @@ public class GameController : MonoBehaviour
 
     private IEnumerator WaitForRecord()
     {
+        clickToRecord.SetActive(true);
         while (true)
         {
             if (Input.GetMouseButtonDown(0))
             {
+                clickToRecord.SetActive(false);
                 StartCoroutine(Capture());
                 yield break;
             }
@@ -60,10 +65,11 @@ public class GameController : MonoBehaviour
         clip = clipNum;
 
         // Set values
-        scrubber.value = 0;
+        scrubber.value = 20;
         play.SetActive(false);
         pause.SetActive(false);
         scrubber.gameObject.SetActive(false);
+        selectSlot.SetActive(false);
 
         switch (clipNum)
         {
@@ -100,20 +106,23 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void TrashAll()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     /// <summary>
     /// Capture the scene normally.
     /// </summary>
     /// <returns></returns>
     private IEnumerator Capture()
     {
-        float time = 0;
+        bool stop = false;
         record.SetActive(true);
 
-        while (time < 20)
+        while (!stop)
         {
-            Debug.Log("We are recording.");
             yield return new WaitForSeconds(0.05f);
-            time += 0.05f;
 
             Move();
             Zoom();
@@ -121,12 +130,27 @@ public class GameController : MonoBehaviour
             switch (clip)
             {
                 case (1):
+                    if (capture1.currentSlot == 400)
+                    {
+                        stop = true;
+                        break;
+                    }
                     capture1.AddCommand(cam.transform.position.x, cam.orthographicSize);
                     break;
                 case (2):
+                    if (capture2.currentSlot == 400)
+                    {
+                        stop = true;
+                        break;
+                    }
                     capture2.AddCommand(cam.transform.position.x, cam.orthographicSize);
                     break;
                 case (3):
+                    if (capture3.currentSlot == 400)
+                    {
+                        stop = true;
+                        break;
+                    }
                     capture3.AddCommand(cam.transform.position.x, cam.orthographicSize);
                     break;
             }
@@ -138,6 +162,7 @@ public class GameController : MonoBehaviour
 
         scrubber.gameObject.SetActive(true);
         play.SetActive(true);
+        selectSlot.SetActive(true);
 
         StartCoroutine(Scrub());
 
@@ -181,6 +206,17 @@ public class GameController : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 scrubber.value -= 0.05f;
+
+                switch (clip)
+                {
+                    case (1):
+                        break;
+                    case (2):
+                        break;
+                    case (3):
+                        
+                        break;
+                }
             }
 
             yield return null;
