@@ -37,8 +37,8 @@ public class GameController : MonoBehaviour
         followers[2] = new FollowerFrank();
     }
 
-    Follower.Action action;
-    Follower.ActionReciever reciever;
+    private Follower.Action action;
+    private Follower.ActionReciever reciever;
 
     /// <summary>
     /// Player chooses to hurt or help

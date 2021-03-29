@@ -12,7 +12,7 @@ public abstract class Follower : MonoBehaviour
 {
     public enum Mood { HAPPY, UPSET, NEUTRAL};
     public int approvalPoints = 5;
-
+        
     public enum Action { HURT, HELP };
     public enum ActionReciever { CHILD, ROYALTY, MURDERER, PEASENT, ANIMAL };
 
