@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class SunnyState : WeatherState 
 {
-    WeatherManager weatherManager;
+    private WeatherManager weatherManager;
 
     void Start()
     {
@@ -55,8 +55,10 @@ public class SunnyState : WeatherState
             yield break;
         }
 
+        // Disable the sun
         sun.GetComponent<SpriteRenderer>().enabled = false;
 
+        // Start cloud transition
         weatherManager.ready = false;
         waitingForClouds = true;
         StartCoroutine(RollCloudsIn());
@@ -66,8 +68,10 @@ public class SunnyState : WeatherState
             yield return null;
         }
 
-        
+        // Switch the state
         weatherManager.currentState = weatherManager.cloudyState;
+
+        // Transition is over
         weatherManager.ready = true;
         weatherManager.ChangeWeather();
         yield break;
@@ -85,8 +89,10 @@ public class SunnyState : WeatherState
             yield break;
         }
 
+        // Disable the sun
         sun.GetComponent<SpriteRenderer>().enabled = false;
 
+        // Start cloud transition
         weatherManager.ready = false;
         waitingForClouds = true;
         StartCoroutine(RollCloudsIn());
@@ -99,8 +105,10 @@ public class SunnyState : WeatherState
         // Start drizzle
         ps.Play();
 
-        
+        // Switch state
         weatherManager.currentState = weatherManager.rainingState;
+
+        // Transition over
         weatherManager.ready = true;
         weatherManager.ChangeWeather();
         yield break;

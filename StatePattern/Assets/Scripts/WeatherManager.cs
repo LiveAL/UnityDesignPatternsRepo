@@ -5,7 +5,6 @@
  * Manage what weather is used. 
  */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeatherManager : MonoBehaviour
@@ -13,24 +12,37 @@ public class WeatherManager : MonoBehaviour
     [Tooltip("Sun Object.")]
     public Transform sun;
     
+    [Tooltip("Rain particles.")]
     public ParticleSystem ps;
 
+    [Tooltip("Sky color object.")]
     public SpriteRenderer sky;
+    [Tooltip("Color of the sky during the day.")]
     public Color day;
+    [Tooltip("Color of the sky when its overcast.")]
     public Color cloudy;
 
+    [Tooltip("One of the clouds that may roll in and out.")]
     public Transform cloud1;
+    [Tooltip("0 position is rolled in.")]
     public Vector2[] cloud1Pos;
+    [Tooltip("The other cloud that may roll in and out.")]
     public Transform cloud2;
+    [Tooltip("0 position is rolled in.")]
     public Vector2[] cloud2Pos;
 
     public enum States { SUNNY, CLOUDY, RAIN }
+
     public WeatherState sunnyState { get; set; }
     public WeatherState cloudyState { get; set; }
     public WeatherState rainingState { get; set; }
 
     public WeatherState currentState {get; set;}
 
+    [HideInInspector]
+    /// <summary>
+    /// Is the state ready to change? 
+    /// </summary>
     public bool ready = true;
 
     // Start is called before the first frame update
@@ -47,7 +59,6 @@ public class WeatherManager : MonoBehaviour
         cloud1.position = cloud1Pos[1];
         cloud2.position = cloud2Pos[1];
 
-        // StartCoroutine(TimeChange());
         ChangeWeather();
     }
 
@@ -55,11 +66,14 @@ public class WeatherManager : MonoBehaviour
     public void CloudOver() { currentState.CloudOver(); }
     public void ClearSkies() { currentState.ClearSkies(); }
 
+    /// <summary>
+    /// Change the current weather
+    /// </summary>
     public void ChangeWeather()
     {
         StopAllCoroutines();
         StartCoroutine(WaitForChangeWeather());
-        blockPanel.SetActive(false);
+        blockPanel.SetActive(false); // Make buttons uninteractable
     }
 
     private IEnumerator WaitForChangeWeather()
@@ -72,6 +86,7 @@ public class WeatherManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeUntilWeatherChange);
 
+        // Randomize the state
         state = (States)Random.Range(0, 3);
 
         switch (state)
@@ -90,6 +105,7 @@ public class WeatherManager : MonoBehaviour
         yield break;
     }
 
+    [Tooltip("Panel that blocks buttons during transitions.")]
     public GameObject blockPanel;
 
     /// <summary>
@@ -101,10 +117,12 @@ public class WeatherManager : MonoBehaviour
         {
             currentState.StartClearing();
             blockPanel.SetActive(true);
-        }
-            
+        }  
     }
 
+    /// <summary>
+    /// Make it cloudy. 
+    /// </summary>
     public void MakeCloudy()
     {
         if (ready)
@@ -112,9 +130,11 @@ public class WeatherManager : MonoBehaviour
             currentState.StartClouding();
             blockPanel.SetActive(true);
         }
-           
     }
 
+    /// <summary>
+    /// Make it rain. 
+    /// </summary>
     public void MakeRain()
     {
         if(ready)
@@ -122,6 +142,5 @@ public class WeatherManager : MonoBehaviour
             currentState.StartRaining();
             blockPanel.SetActive(true);
         }
-    }
-            
+    }     
 }

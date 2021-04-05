@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class RainState : WeatherState
 {
-    WeatherManager weatherManager;
+   private WeatherManager weatherManager;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +42,14 @@ public class RainState : WeatherState
             yield break;
         }
 
+        // Enabled the sun
         sun.GetComponent<SpriteRenderer>().enabled = true;
 
+        // Roll clouds out
         weatherManager.ready = false;
         waitingForClouds = true;
 
+        // Stop the rain
         ps.Stop();
         StartCoroutine(RollCloudsOut());
 
@@ -55,8 +58,10 @@ public class RainState : WeatherState
             yield return null;
         }
 
-        
+        // Switch the current state
         weatherManager.currentState = weatherManager.sunnyState;
+
+        // Transition is over
         weatherManager.ready = true;
         weatherManager.ChangeWeather();
         
@@ -79,7 +84,10 @@ public class RainState : WeatherState
         // Stop rain 
         ps.Stop();
 
+        // Switch the current state
         weatherManager.currentState = weatherManager.cloudyState;
+
+        // Transition is over
         weatherManager.ready = true;
         weatherManager.ChangeWeather();
         yield break;
