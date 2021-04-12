@@ -82,13 +82,4 @@ public class ObjectPooler : MonoBehaviour
 
         poolDictionary[tag].Enqueue(objectToSpawn);
     }
-
-    /// <summary>
-    /// Get the number of active bullet holes in the scene. 
-    /// </summary>
-    /// <param name="tag">Tag of the bullet hole type.</param>
-    public int GetNumHoles(string tag)
-    {
-        return poolDictionary[tag].Count;
-    }
 }

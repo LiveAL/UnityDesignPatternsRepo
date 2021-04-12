@@ -33,7 +33,7 @@ public class PlayerBehavior : MonoBehaviour
     private float mouseOffsetY = -0.22f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         pooler = ObjectPooler.instance;
         gc = FindObjectOfType<GameController>();
