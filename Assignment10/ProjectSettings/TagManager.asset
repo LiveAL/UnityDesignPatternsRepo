@@ -7,9 +7,9 @@ TagManager:
   - Metal Object
   - Wooden Object
   - Concrete Object
-  - Concrete Hole
-  - Metal Hole
-  - Wood Hole
+  - Concrete
+  - Metal
+  - Wood
   layers:
   - Default
   - TransparentFX
