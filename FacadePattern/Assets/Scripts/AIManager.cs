@@ -24,6 +24,9 @@ public class AIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blueMask = LayerMask.NameToLayer("Blue");
+        redMask = LayerMask.NameToLayer("Red");
+
         // Spawn set number of ais and add to list 
         gc = FindObjectOfType<GameController>();
         
@@ -48,11 +51,9 @@ public class AIManager : MonoBehaviour
             GameObject red = Instantiate(reds);
             AI redAI = red.GetComponent<AI>();
 
-            redAI.SetValues(GameController.TeamColor.RED, gc.red, blueMask);
+            redAI.SetValues(GameController.TeamColor.RED, gc.red, blueMask, redMask);
 
             ai.Add(redAI);
-
-            redAI.Respawn();
         }
 
         // Create blue enemies
@@ -60,11 +61,9 @@ public class AIManager : MonoBehaviour
         {
             GameObject blue = Instantiate(blues);
             AI blueAI = blue.GetComponent<AI>();
-            blueAI.SetValues(GameController.TeamColor.BLUE, gc.blue, redMask);
+            blueAI.SetValues(GameController.TeamColor.BLUE, gc.blue, redMask, blueMask);
 
             ai.Add(blueAI);
-
-            blueAI.Respawn();
         }
     }
 

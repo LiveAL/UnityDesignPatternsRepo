@@ -22,7 +22,6 @@ public class SpawnManager : MonoBehaviour
     public void Retreat()
     {
         spawn = spawn.retreatPoint;
-        // Change visuals for the active
     }
 
     /// <summary>
@@ -31,7 +30,6 @@ public class SpawnManager : MonoBehaviour
     public void Advance()
     {
         spawn = spawn.advancePoint;
-        // Change visuals for the active
     }
 
     public Vector3 GetPosition()

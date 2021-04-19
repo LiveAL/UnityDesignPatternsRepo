@@ -95,9 +95,9 @@ public class PlayerBehavior : Players
             {
                 Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 2f, enemyTeam);
 
-                if (hits != null)
+                if (hits.Length > 0)
                 {
-                    Attack(hits);
+                    StartCoroutine(Attack(hits));
                 }
             }
 

@@ -12,16 +12,20 @@ using UnityEngine;
 
 public class AI : Players
 {
-    public void SetValues(GameController.TeamColor teamColor, SpawnManager spawner, LayerMask enemyTeam)
+    public void SetValues(GameController.TeamColor teamColor, SpawnManager spawner, LayerMask enemyTeam, LayerMask teamMask)
     {
         thisTeam = teamColor;
         this.spawner = spawner;
+        this.enemyTeam = enemyTeam;
+
+        gameObject.layer = teamMask;
 
         dead = true;
 
-        speed = Random.Range(4, 5);
+        speed = Random.Range(2, 5);
 
         SetTarget();
+        Respawn();
         StartCoroutine(Move());
     }
 
@@ -73,9 +77,13 @@ public class AI : Players
     {
         if (dead)
         {
-            transform.position = spawner.transform.position;
+            float xOffset = spawner.GetPosition().x + Random.Range(-1f, 1f);
+            float yOffset = spawner.GetPosition().y + Random.Range(-1f, 1f);
+            transform.position = new Vector3(xOffset, yOffset, 0);
 
             gameObject.SetActive(true);
+
+            health = 3;
 
             dead = false;
 
@@ -95,15 +103,15 @@ public class AI : Players
 
             if (canAttack)
             {
-                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 2f, enemyTeam);
+                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, .5f, enemyTeam);
 
-                if (hits != null)
+                if (hits.Length > 0)
                 {
-                    Attack(hits);
+                    StartCoroutine(Attack(hits));
                 }
             }
-            
-            yield break;
+
+            yield return null;
         }
     }
 }

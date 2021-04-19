@@ -57,12 +57,16 @@ public abstract class Players : MonoBehaviour
     {
         canAttack = false;
 
+        transform.localScale = new Vector3(4, 4, 1);
+
         foreach (Collider2D target in targets)
         {
-            target.GetComponent<AI>().TakeDamage();
+            target.GetComponent<Players>().TakeDamage();
         }
         // Delay next attack
         yield return new WaitForSeconds(1f);
+
+        transform.localScale = new Vector3(3, 3, 1);
 
         canAttack = true;
     }
@@ -72,6 +76,7 @@ public abstract class Players : MonoBehaviour
         if (collision.GetComponent<CapturePoint>().activePoint)
         {
             onPoint = true;
+            collision.GetComponent<CapturePoint>().AddPlayer(thisTeam);
         }
     }
 
@@ -80,6 +85,7 @@ public abstract class Players : MonoBehaviour
         if (collision.GetComponent<CapturePoint>().activePoint)
         {
             onPoint = false;
+            collision.GetComponent<CapturePoint>().RemovePlayer(thisTeam);
         }
     }
 }

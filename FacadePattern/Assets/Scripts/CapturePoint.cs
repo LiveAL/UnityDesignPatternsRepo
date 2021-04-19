@@ -28,9 +28,15 @@ public class CapturePoint : MonoBehaviour
     private Color redColor = new Color(0.8584906f, 0.3361071f, 0.3361071f, 1);
     private Color blueColor = new Color(0.244304f, 0.5851645f, 0.8490566f, 1);
 
+    private SpriteRenderer sr;
+    private GameController gc;
+
     // Start is called before the first frame update
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        gc = FindObjectOfType<GameController>();
+
         location = transform.position;
 
         if(previous == false)
@@ -62,7 +68,51 @@ public class CapturePoint : MonoBehaviour
     private int redProgress = 0;
 
     // List of teams on the point
+    public List<Players> playersOnPoint = new List<Players>();
 
-    // Record entering and exiting events. Begin capture if only one team. 
-    // Lerp color towards the team capture
+    private int redNum = 0;
+    private int blueNum = 0;
+
+    public void AddPlayer(GameController.TeamColor color)
+    {
+        if (color == GameController.TeamColor.RED)
+            redNum++;
+        else
+            blueNum++;
+
+    }
+
+    public void RemovePlayer(GameController.TeamColor color)
+    {
+        if (color == GameController.TeamColor.RED)
+            redNum--;
+        else
+            blueNum--;
+
+    }
+
+    private IEnumerator AdvanceProgress()
+    {
+        while (true)
+        {
+            // Advance red
+            if (redNum > 0 && blueNum == 0)
+            {
+                sr.color = Color.Lerp(sr.color, redColor, (Time.deltaTime * 10));
+
+                if (sr.color == redColor)
+                    gc.PointCaptured(GameController.TeamColor.RED);
+            }
+            // Advance blue
+            else if (blueNum > 0 && redNum == 0)
+            {
+                sr.color = Color.Lerp(sr.color, blueColor, (Time.deltaTime * 10));
+
+                if (sr.color == blueColor)
+                    gc.PointCaptured(GameController.TeamColor.BLUE);
+            }
+
+            yield return null;
+        }
+    }
 }

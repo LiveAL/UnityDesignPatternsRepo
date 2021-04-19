@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -29,8 +30,17 @@ public class GameController : MonoBehaviour
     private LayerMask enemy;
     private LayerMask team;
 
+    public GameObject winScreen;
+    public GameObject redWin;
+    public GameObject blueWin;
+
     IEnumerator Start()
     {
+        Time.timeScale = 1;
+
+        blueMask = LayerMask.NameToLayer("Blue");
+        redMask = LayerMask.NameToLayer("Red");
+
         player = FindObjectOfType<PlayerBehavior>();
 
         // Wait for player to select team
@@ -43,6 +53,14 @@ public class GameController : MonoBehaviour
         player.Respawn();
 
         ai.CreateAIs(playerTeam);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     /// <summary>
@@ -104,5 +122,17 @@ public class GameController : MonoBehaviour
         StopCoroutine(ai.RespawnWaves(30));
 
         StopCoroutine(player.Interact());
+
+        Time.timeScale = 0;
+
+        if (winner == TeamColor.RED)
+        {
+            redWin.SetActive(true);
+        }
+        else
+        {
+            blueWin.SetActive(true);
+        }
+        winScreen.SetActive(true);
     }
 }
