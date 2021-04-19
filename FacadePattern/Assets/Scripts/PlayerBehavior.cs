@@ -18,6 +18,13 @@ public class PlayerBehavior : Players
         coll = GetComponent<Collider2D>();
     }
 
+    /// <summary>
+    /// Set player values
+    /// </summary>
+    /// <param name="color">Color of the player's team</param>
+    /// <param name="spawner">Spawner for the player's team</param>
+    /// <param name="enemyTeamMask">Layermask the enemy team is on</param>
+    /// <param name="thisTeamMask">Layermask the player's team is on</param>
     public void SetValues(GameController.TeamColor color, SpawnManager spawner, LayerMask enemyTeamMask, LayerMask thisTeamMask)
     {
         thisTeam = color;
@@ -71,6 +78,10 @@ public class PlayerBehavior : Players
         }
     }
 
+    /// <summary>
+    /// Player waits to respawn after death.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator WaitForRespawn()
     {
         yield return new WaitForSeconds(10f);
@@ -78,6 +89,9 @@ public class PlayerBehavior : Players
         Respawn();
     }
 
+    /// <summary>
+    /// Player may use their controls
+    /// </summary>
     public IEnumerator Interact()
     {
         while (true)

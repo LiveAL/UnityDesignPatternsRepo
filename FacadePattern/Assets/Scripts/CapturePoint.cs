@@ -47,18 +47,29 @@ public class CapturePoint : MonoBehaviour
         {
             nextTerminus = true;
         }
+
+        StartCoroutine(AdvanceProgress());
     }
 
+    /// <summary>
+    /// Is this the last point on the advance?
+    /// </summary>
     public bool IsNextTerminus()
     {
         return nextTerminus;
     }
 
+    /// <summary>
+    /// Is this the last point on the retreat?
+    /// </summary>
     public bool IsPreviousTerminus()
     {
         return previousTerminus;
     }
 
+    /// <summary>
+    /// Get location of the point
+    /// </summary>
     public Vector3 GetLocation()
     {
         return location;
@@ -73,6 +84,10 @@ public class CapturePoint : MonoBehaviour
     private int redNum = 0;
     private int blueNum = 0;
 
+    /// <summary>
+    /// Add to the amount of players on the point
+    /// </summary>
+    /// <param name="color">Team the player is on</param>
     public void AddPlayer(GameController.TeamColor color)
     {
         if (color == GameController.TeamColor.RED)
@@ -82,6 +97,10 @@ public class CapturePoint : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Subtract from the amount of players on the point
+    /// </summary>
+    /// <param name="color">Team the player removed is on</param>
     public void RemovePlayer(GameController.TeamColor color)
     {
         if (color == GameController.TeamColor.RED)
@@ -91,6 +110,9 @@ public class CapturePoint : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Change the color of the point for player progresses
+    /// </summary>
     private IEnumerator AdvanceProgress()
     {
         while (true)

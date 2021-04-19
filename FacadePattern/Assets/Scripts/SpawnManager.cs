@@ -32,6 +32,9 @@ public class SpawnManager : MonoBehaviour
         spawn = spawn.advancePoint;
     }
 
+    /// <summary>
+    /// Get location of active spawner
+    /// </summary>
     public Vector3 GetPosition()
     {
         return spawn.GetLocation();

@@ -12,6 +12,13 @@ using UnityEngine;
 
 public class AI : Players
 {
+    /// <summary>
+    /// Set AI values
+    /// </summary>
+    /// <param name="color">Color of the AI's team</param>
+    /// <param name="spawner">Spawner for theAI's team</param>
+    /// <param name="enemyTeamMask">Layermask the enemy team is on</param>
+    /// <param name="thisTeamMask">Layermask the AI's team is on</param>
     public void SetValues(GameController.TeamColor teamColor, SpawnManager spawner, LayerMask enemyTeam, LayerMask teamMask)
     {
         thisTeam = teamColor;

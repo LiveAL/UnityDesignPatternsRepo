@@ -20,6 +20,9 @@ public class CapturePointManager : MonoBehaviour
         gc = FindObjectOfType<GameController>();
     }
 
+    /// <summary>
+    /// Blue has captured the point
+    /// </summary>
     public void AdvanceBlue()
     {
         if (capture.IsPreviousTerminus())
@@ -31,6 +34,9 @@ public class CapturePointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Red has captured the point
+    /// </summary>
     public void AdvanceRed()
     {
         if (!capture.IsNextTerminus())
@@ -42,6 +48,9 @@ public class CapturePointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get the next location to target
+    /// </summary>
     public Vector3 GetCaptureTarget()
     {
         return capture.GetLocation();

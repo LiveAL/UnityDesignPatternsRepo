@@ -117,6 +117,10 @@ public class GameController : MonoBehaviour
         player.Respawn();
     }
 
+    /// <summary>
+    /// End the game
+    /// </summary>
+    /// <param name="winner">Who won?</param>
     public void GameOver(TeamColor winner)
     {
         StopCoroutine(ai.RespawnWaves(30));

@@ -26,6 +26,9 @@ public class SpawnPoint : MonoBehaviour
         location = transform.position;
     }
 
+    /// <summary>
+    /// Get location on the spawn
+    /// </summary>
     public Vector3 GetLocation()
     {
         return location;

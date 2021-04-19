@@ -31,6 +31,11 @@ public class AIManager : MonoBehaviour
         gc = FindObjectOfType<GameController>();
         
     }
+
+    /// <summary>
+    /// Create ai's for the team
+    /// </summary>
+    /// <param name="playerTeam">Team the player is on</param>
     public void CreateAIs(GameController.TeamColor playerTeam)
     {
         int redAdv = 0;
@@ -67,6 +72,9 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Change the targetting location for AI
+    /// </summary>
     public void RerouteAI()
     {
         foreach(AI ai in ai)
@@ -75,6 +83,9 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Respawn all ai
+    /// </summary>
     public void RespawnAI()
     {
         foreach (AI ai in ai)
@@ -86,6 +97,10 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Countdown to next respawn
+    /// </summary>
+    /// <param name="respawnDelay">Time until next respawn</param>
     public IEnumerator RespawnWaves(float respawnDelay)
     {
         while (true)
