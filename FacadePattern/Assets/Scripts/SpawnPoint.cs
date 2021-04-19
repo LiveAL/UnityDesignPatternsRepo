@@ -25,4 +25,9 @@ public class SpawnPoint : MonoBehaviour
     {
         location = transform.position;
     }
+
+    public Vector3 GetLocation()
+    {
+        return location;
+    }
 }

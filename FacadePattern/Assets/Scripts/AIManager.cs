@@ -10,17 +10,61 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AIManager : MonoBehaviour
-{
-    private List<AI> ai;
+{ 
+    private List<AI> ai = new List<AI>();
+
+    public GameObject reds;
+    public GameObject blues;
+
+    public LayerMask redMask;
+    public LayerMask blueMask;
+
+    private GameController gc;
 
     // Start is called before the first frame update
     void Start()
     {
         // Spawn set number of ais and add to list 
+        gc = FindObjectOfType<GameController>();
+        
+    }
+    public void CreateAIs(GameController.TeamColor playerTeam)
+    {
+        int redAdv = 0;
+        int blueAdv = 0;
 
-        foreach(AI ai in FindObjectsOfType<AI>())
+        if (playerTeam == GameController.TeamColor.RED)
         {
-            this.ai.Add(ai);
+            redAdv++;
+        }
+        else
+        {
+            blueAdv++;
+        }
+
+        // Create red enemies
+        for(int i = 0 + redAdv; i < 25; i++)
+        {
+            GameObject red = Instantiate(reds);
+            AI redAI = red.GetComponent<AI>();
+
+            redAI.SetValues(GameController.TeamColor.RED, gc.red, blueMask);
+
+            ai.Add(redAI);
+
+            redAI.Respawn();
+        }
+
+        // Create blue enemies
+        for (int i = 0 + blueAdv; i < 25; i++)
+        {
+            GameObject blue = Instantiate(blues);
+            AI blueAI = blue.GetComponent<AI>();
+            blueAI.SetValues(GameController.TeamColor.BLUE, gc.blue, redMask);
+
+            ai.Add(blueAI);
+
+            blueAI.Respawn();
         }
     }
 
@@ -42,4 +86,18 @@ public class AIManager : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator RespawnWaves(float respawnDelay)
+    {
+        while (true)
+        {
+            // Respawn inactive npc every x seconds
+            yield return new WaitForSeconds(respawnDelay);
+
+            RespawnAI();
+
+            yield return null;
+        }
+    }
+
 }
