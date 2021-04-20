@@ -16,8 +16,8 @@ public class AIManager : MonoBehaviour
     public GameObject reds;
     public GameObject blues;
 
-    public LayerMask redMask;
-    public LayerMask blueMask;
+    private LayerMask redMask;
+    private LayerMask blueMask;
 
     private GameController gc;
 
@@ -70,6 +70,8 @@ public class AIManager : MonoBehaviour
 
             ai.Add(blueAI);
         }
+
+        StartCoroutine(RespawnWaves());
     }
 
     /// <summary>
@@ -101,12 +103,12 @@ public class AIManager : MonoBehaviour
     /// Countdown to next respawn
     /// </summary>
     /// <param name="respawnDelay">Time until next respawn</param>
-    public IEnumerator RespawnWaves(float respawnDelay)
+    public IEnumerator RespawnWaves()
     {
         while (true)
         {
             // Respawn inactive npc every x seconds
-            yield return new WaitForSeconds(respawnDelay);
+            yield return new WaitForSeconds(20);
 
             RespawnAI();
 

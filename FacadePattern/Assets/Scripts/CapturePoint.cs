@@ -75,12 +75,6 @@ public class CapturePoint : MonoBehaviour
         return location;
     }
 
-    private int blueProgress = 0;
-    private int redProgress = 0;
-
-    // List of teams on the point
-    public List<Players> playersOnPoint = new List<Players>();
-
     private int redNum = 0;
     private int blueNum = 0;
 
@@ -113,9 +107,9 @@ public class CapturePoint : MonoBehaviour
     /// <summary>
     /// Change the color of the point for player progresses
     /// </summary>
-    private IEnumerator AdvanceProgress()
+    public IEnumerator AdvanceProgress()
     {
-        while (true)
+        while (activePoint)
         {
             // Advance red
             if (redNum > 0 && blueNum == 0)
@@ -123,7 +117,13 @@ public class CapturePoint : MonoBehaviour
                 sr.color = Color.Lerp(sr.color, redColor, (Time.deltaTime * 10));
 
                 if (sr.color == redColor)
-                    gc.PointCaptured(GameController.TeamColor.RED);
+                {
+                    if(!nextTerminus)
+                        gc.PointCaptured(GameController.TeamColor.RED);
+                    else
+                        gc.GameOver(GameController.TeamColor.RED);
+                }
+                    
             }
             // Advance blue
             else if (blueNum > 0 && redNum == 0)
@@ -131,7 +131,13 @@ public class CapturePoint : MonoBehaviour
                 sr.color = Color.Lerp(sr.color, blueColor, (Time.deltaTime * 10));
 
                 if (sr.color == blueColor)
-                    gc.PointCaptured(GameController.TeamColor.BLUE);
+                {
+                    if(!previousTerminus)
+                        gc.PointCaptured(GameController.TeamColor.BLUE);
+                    else
+                        gc.GameOver(GameController.TeamColor.BLUE);
+                }
+                    
             }
 
             yield return null;

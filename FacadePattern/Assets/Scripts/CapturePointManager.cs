@@ -25,8 +25,16 @@ public class CapturePointManager : MonoBehaviour
     /// </summary>
     public void AdvanceBlue()
     {
-        if (capture.IsPreviousTerminus())
+        if (!capture.IsPreviousTerminus())
+        {
+            capture.activePoint = false;
+            capture.GetComponent<SpriteRenderer>().color = Color.black;
+
             capture = capture.previous;
+            capture.GetComponent<SpriteRenderer>().color = Color.white;
+            capture.activePoint = true;
+            StartCoroutine(capture.AdvanceProgress());
+        }
         else
         {
             // blue wins
@@ -40,7 +48,15 @@ public class CapturePointManager : MonoBehaviour
     public void AdvanceRed()
     {
         if (!capture.IsNextTerminus())
+        {
+            capture.activePoint = false;
+            capture.GetComponent<SpriteRenderer>().color = Color.black;
+
             capture = capture.next;
+            capture.GetComponent<SpriteRenderer>().color = Color.white;
+            capture.activePoint = true;
+            StartCoroutine(capture.AdvanceProgress());
+        }         
         else
         {
             // red wins

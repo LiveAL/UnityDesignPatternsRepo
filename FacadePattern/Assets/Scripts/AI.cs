@@ -29,7 +29,8 @@ public class AI : Players
 
         dead = true;
 
-        speed = Random.Range(2, 5);
+        speed = Random.Range(1, 3);
+        health = Random.Range(3,6);
 
         SetTarget();
         Respawn();
@@ -90,9 +91,13 @@ public class AI : Players
 
             gameObject.SetActive(true);
 
-            health = 3;
+            health = 6;
 
             dead = false;
+
+            transform.localScale = new Vector3(3, 3, 1);
+
+            canAttack = true;
 
             StartCoroutine(Move());
         }
@@ -110,7 +115,7 @@ public class AI : Players
 
             if (canAttack)
             {
-                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, .5f, enemyTeam);
+                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, .5f, (1<<enemyTeam));
 
                 if (hits.Length > 0)
                 {

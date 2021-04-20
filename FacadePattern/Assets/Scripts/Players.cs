@@ -4,20 +4,20 @@ using UnityEngine;
 
 public abstract class Players : MonoBehaviour
 {
-    public GameController.TeamColor thisTeam;
-    public LayerMask enemyTeam;
+    [HideInInspector] public GameController.TeamColor thisTeam;
+    [HideInInspector] public LayerMask enemyTeam;
 
-    public bool onPoint = false;
-    public bool canAttack = true;
-    public bool dead = false;
+    [HideInInspector] public bool onPoint = false;
+    [HideInInspector] public bool canAttack = true;
+    [HideInInspector] public bool dead = false;
 
-    public float speed;
-    public int health = 3;
+    [HideInInspector] public float speed;
+    [HideInInspector] public int health;
 
-    public CapturePointManager capturePoint;
-    public SpawnManager spawner;
+    [HideInInspector] public CapturePointManager capturePoint;
+    [HideInInspector] public SpawnManager spawner;
 
-    public Vector3 target;
+    [HideInInspector] public Vector3 target;
 
     private void Awake()
     {
@@ -61,7 +61,8 @@ public abstract class Players : MonoBehaviour
 
         foreach (Collider2D target in targets)
         {
-            target.GetComponent<Players>().TakeDamage();
+            
+            target.gameObject.GetComponent<Players>().TakeDamage();
         }
         // Delay next attack
         yield return new WaitForSeconds(1f);

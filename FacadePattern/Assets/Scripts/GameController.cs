@@ -14,16 +14,15 @@ public class GameController : MonoBehaviour
     public enum TeamColor { RED, BLUE }
 
     private CapturePointManager capturePoint;
-
-    public AIManager ai;
+    private AIManager ai;
 
     public SpawnManager red;
     public SpawnManager blue;
 
-    public LayerMask blueMask;
-    public LayerMask redMask;
+    private LayerMask blueMask;
+    private LayerMask redMask;
 
-    public PlayerBehavior player;
+    private PlayerBehavior player;
     private bool chosenTeam;
     private TeamColor playerTeam;
     private SpawnManager playerSpawn;
@@ -42,6 +41,9 @@ public class GameController : MonoBehaviour
         redMask = LayerMask.NameToLayer("Red");
 
         player = FindObjectOfType<PlayerBehavior>();
+        capturePoint = FindObjectOfType<CapturePointManager>();
+        ai = FindObjectOfType<AIManager>();
+
 
         // Wait for player to select team
         while (!chosenTeam)
@@ -96,21 +98,20 @@ public class GameController : MonoBehaviour
         switch (teamColor)
         {
             case (TeamColor.RED):
-                red.Advance();
-                blue.Retreat();
                 capturePoint.AdvanceRed();
+                red.Advance();
+                blue.Advance();
                 break;
 
             case (TeamColor.BLUE):
-                blue.Advance();
-                red.Retreat();
                 capturePoint.AdvanceBlue();
+                blue.Retreat();
+                red.Retreat();
                 break;
         }
 
-        StopCoroutine(ai.RespawnWaves(30));
+        StopCoroutine(ai.RespawnWaves());
         ai.RespawnAI();
-        StartCoroutine(ai.RespawnWaves(30));
         ai.RerouteAI();
 
         StopCoroutine(player.WaitForRespawn());
@@ -123,7 +124,7 @@ public class GameController : MonoBehaviour
     /// <param name="winner">Who won?</param>
     public void GameOver(TeamColor winner)
     {
-        StopCoroutine(ai.RespawnWaves(30));
+        StopCoroutine(ai.RespawnWaves());
 
         StopCoroutine(player.Interact());
 

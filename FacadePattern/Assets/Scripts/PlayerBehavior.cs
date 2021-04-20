@@ -1,21 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBehavior : Players
 {
-    public SpriteRenderer sr;
-    public Collider2D coll;
+    private SpriteRenderer sr;
+    private Collider2D coll;
 
     private Color redColor = new Color(0.8584906f, 0.3361071f, 0.3361071f, 1);
     private Color blueColor = new Color(0.244304f, 0.5851645f, 0.8490566f, 1);
 
+    public GameObject respawnTime;
+    public Text respawnTimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        speed = 5;
+        speed = 6;
+
         sr = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
+
+        health = 10;
     }
 
     /// <summary>
@@ -40,6 +47,7 @@ public class PlayerBehavior : Players
         dead = true;
 
         Respawn();
+        StartCoroutine(Interact());
     }
 
     /// <summary>
@@ -55,7 +63,6 @@ public class PlayerBehavior : Players
             coll.enabled = false;
             sr.enabled = false;
 
-            StopCoroutine(Interact());
             StartCoroutine(WaitForRespawn());
         }
     }
@@ -67,14 +74,19 @@ public class PlayerBehavior : Players
     {
         if (dead)
         {
+            respawnTime.SetActive(false);
+
             transform.position = spawner.GetPosition();
             coll.enabled = true;
             sr.enabled = true;
 
+            health = 6;
+
             dead = false;
 
-            StartCoroutine(Interact());
+            transform.localScale = new Vector3(3, 3, 1);
 
+            canAttack = true;
         }
     }
 
@@ -84,8 +96,19 @@ public class PlayerBehavior : Players
     /// <returns></returns>
     public IEnumerator WaitForRespawn()
     {
-        yield return new WaitForSeconds(10f);
+        canAttack = false;
+        respawnTime.SetActive(true);
 
+        float timeLeft = 5;
+        respawnTimer.text = "Time to respawn: " + timeLeft;
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            timeLeft--;
+            respawnTimer.text = "Time to respawn: " + timeLeft;
+        }
+        
         Respawn();
     }
 
@@ -101,13 +124,12 @@ public class PlayerBehavior : Players
             float yMove = Input.GetAxis("Vertical");
 
             Vector3 move = new Vector3(xMove, yMove, 0).normalized;
-
-            transform.position += (move * speed * Time.deltaTime);
+            transform.Translate(move * speed * Time.deltaTime);
 
             // Attack
             if (Input.GetMouseButtonDown(0) && canAttack)
             {
-                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 2f, enemyTeam);
+                Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 2f, (1<<enemyTeam));
 
                 if (hits.Length > 0)
                 {
