@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Ashton Lively
+ * Players.cs
+ * Assignment 11
+ * Player behavior in the game. May be AI or the player controlled character.
+ */
+
+using System.Collections;
 using UnityEngine;
 
 public abstract class Players : MonoBehaviour
@@ -42,6 +48,7 @@ public abstract class Players : MonoBehaviour
     {
         health--;
 
+        // Player is dead
         if (health <= 0)
         {
             dead = true;
@@ -57,16 +64,18 @@ public abstract class Players : MonoBehaviour
     {
         canAttack = false;
 
+        // Visualize attack
         transform.localScale = new Vector3(4, 4, 1);
 
-        foreach (Collider2D target in targets)
+        foreach (Collider2D target in targets) // Enemies in range take damage
         {
-            
             target.gameObject.GetComponent<Players>().TakeDamage();
         }
+
         // Delay next attack
         yield return new WaitForSeconds(1f);
 
+        // Visualize ready to attack again
         transform.localScale = new Vector3(3, 3, 1);
 
         canAttack = true;
@@ -76,6 +85,7 @@ public abstract class Players : MonoBehaviour
     {
         if (collision.GetComponent<CapturePoint>().activePoint)
         {
+            // Add to list of players on the point
             onPoint = true;
             collision.GetComponent<CapturePoint>().AddPlayer(thisTeam);
         }
@@ -85,6 +95,7 @@ public abstract class Players : MonoBehaviour
     {
         if (collision.GetComponent<CapturePoint>().activePoint)
         {
+            // Remove from list of players on the point
             onPoint = false;
             collision.GetComponent<CapturePoint>().RemovePlayer(thisTeam);
         }

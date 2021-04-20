@@ -4,8 +4,7 @@
  * Assignment 11
  * Manage the current active spawn and the next active.
  */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour

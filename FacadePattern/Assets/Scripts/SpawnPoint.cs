@@ -4,8 +4,7 @@
  * Assignment 11
  * Behavior for player spawners and information on its type. 
  */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour

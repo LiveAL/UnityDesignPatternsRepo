@@ -1,5 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Ashton Lively
+ * PlayerBehavior.cs
+ * Assignment 11
+ * Player controlled character behavior and controls. 
+ */
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +17,19 @@ public class PlayerBehavior : Players
     private Color redColor = new Color(0.8584906f, 0.3361071f, 0.3361071f, 1);
     private Color blueColor = new Color(0.244304f, 0.5851645f, 0.8490566f, 1);
 
+    [Tooltip("Panel with respawn time on it.")]
     public GameObject respawnTime;
+    [Tooltip("Time left in respawn text.")]
     public Text respawnTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         speed = 6;
+        health = 10;
 
         sr = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
-
-        health = 10;
     }
 
     /// <summary>
@@ -39,14 +46,15 @@ public class PlayerBehavior : Players
         this.spawner = spawner;
         gameObject.layer = thisTeamMask;
 
+        // Change color of player
         if (color == GameController.TeamColor.RED)
             sr.color = redColor;
         else
             sr.color = blueColor;
 
         dead = true;
-
         Respawn();
+
         StartCoroutine(Interact());
     }
 
@@ -57,6 +65,7 @@ public class PlayerBehavior : Players
     {
         health--;
 
+        // Player is dead
         if (health <= 0)
         {
             dead = true;

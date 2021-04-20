@@ -13,7 +13,9 @@ public class AIManager : MonoBehaviour
 { 
     private List<AI> ai = new List<AI>();
 
+    [Tooltip("Red prefab")]
     public GameObject reds;
+    [Tooltip("Blue prefab")]
     public GameObject blues;
 
     private LayerMask redMask;

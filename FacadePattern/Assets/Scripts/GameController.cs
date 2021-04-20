@@ -5,7 +5,6 @@
  * Controls the capture points and spawn behavior of players.
  */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,23 +14,20 @@ public class GameController : MonoBehaviour
 
     private CapturePointManager capturePoint;
     private AIManager ai;
-
     public SpawnManager red;
     public SpawnManager blue;
+    private PlayerBehavior player;
+    private UIManager ui;
 
     private LayerMask blueMask;
     private LayerMask redMask;
 
-    private PlayerBehavior player;
+    // Values for the player set
     private bool chosenTeam;
     private TeamColor playerTeam;
     private SpawnManager playerSpawn;
     private LayerMask enemy;
     private LayerMask team;
-
-    public GameObject winScreen;
-    public GameObject redWin;
-    public GameObject blueWin;
 
     IEnumerator Start()
     {
@@ -43,7 +39,7 @@ public class GameController : MonoBehaviour
         player = FindObjectOfType<PlayerBehavior>();
         capturePoint = FindObjectOfType<CapturePointManager>();
         ai = FindObjectOfType<AIManager>();
-
+        ui = FindObjectOfType<UIManager>();
 
         // Wait for player to select team
         while (!chosenTeam)
@@ -95,6 +91,8 @@ public class GameController : MonoBehaviour
     /// <param name="teamColor">Color of the team that captured the point.</param>
     public void PointCaptured(TeamColor teamColor)
     {
+        StartCoroutine(ui.DisplayCaptured());
+
         switch (teamColor)
         {
             case (TeamColor.RED):
@@ -128,16 +126,6 @@ public class GameController : MonoBehaviour
 
         StopCoroutine(player.Interact());
 
-        Time.timeScale = 0;
-
-        if (winner == TeamColor.RED)
-        {
-            redWin.SetActive(true);
-        }
-        else
-        {
-            blueWin.SetActive(true);
-        }
-        winScreen.SetActive(true);
+        ui.DetermineWinner(winner);
     }
 }

@@ -111,7 +111,7 @@ public class CapturePoint : MonoBehaviour
     {
         while (activePoint)
         {
-            // Advance red
+            // Advance red progress
             if (redNum > 0 && blueNum == 0)
             {
                 sr.color = Color.Lerp(sr.color, redColor, (Time.deltaTime * 10));
@@ -125,7 +125,7 @@ public class CapturePoint : MonoBehaviour
                 }
                     
             }
-            // Advance blue
+            // Advance blue progress
             else if (blueNum > 0 && redNum == 0)
             {
                 sr.color = Color.Lerp(sr.color, blueColor, (Time.deltaTime * 10));
